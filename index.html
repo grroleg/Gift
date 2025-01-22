@@ -87,7 +87,7 @@
 </head>
 <body>
   <div class="modal" id="passwordModal">
-    <input type="password" id="password" placeholder="Введите пароль">
+    <input type="password" id="password" placeholder="Введи пароль">
     <button id="submitButton">Принять</button>
   </div>
   <div id="confetti"></div>
@@ -103,7 +103,7 @@
     const gift = document.getElementById('gift');
 
     submitButton.addEventListener('click', () => {
-      if (passwordInput.value === '1234') {
+      if (passwordInput.value === '4THZ2T7R38ES') {
         modal.classList.add('hidden'); // Плавное исчезновение модального окна
         setTimeout(() => {
           modal.style.display = 'none'; // Убираем окно из DOM
@@ -111,7 +111,7 @@
           gift.style.display = 'block';
         }, 500); // Задержка для завершения анимации исчезновения
       } else {
-        alert('Неверный пароль! Попробуйте еще раз.');
+        alert('Неверный пароль! Попробуй еще раз.');
       }
     });
 
