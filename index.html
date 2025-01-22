@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Секретный Подарок</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url("bg.png");
+      font-family: Arial, sans-serif;
+    }
+
+    .modal {
+      background: #313140;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .hidden {
+      opacity: 0;
+      transform: scale(0.8);
+      pointer-events: none;
+    }
+
+    input[type="password"] {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #464637;
+      border-radius: 5px;
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #fff;
+      background: #007BFF;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    #gift {
+      margin-top: 20px;
+      display: none;
+    }
+
+    #gift img {
+      width: 80%;
+	  display: block;
+	  margin-left: auto;
+	  margin-right: auto;
+    }
+
+    /* Конфетти */
+    #confetti {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="modal" id="passwordModal">
+    <input type="password" id="password" placeholder="Введите пароль">
+    <button id="submitButton">Принять</button>
+  </div>
+  <div id="confetti"></div>
+  <div id="gift">
+    <img src="gift.png" alt="Подарок">
+  </div>
+
+  <script>
+    const modal = document.getElementById('passwordModal');
+    const passwordInput = document.getElementById('password');
+    const submitButton = document.getElementById('submitButton');
+    const confettiContainer = document.getElementById('confetti');
+    const gift = document.getElementById('gift');
+
+    submitButton.addEventListener('click', () => {
+      if (passwordInput.value === '1234') {
+        modal.classList.add('hidden'); // Плавное исчезновение модального окна
+        setTimeout(() => {
+          modal.style.display = 'none'; // Убираем окно из DOM
+          showConfetti();
+          gift.style.display = 'block';
+        }, 500); // Задержка для завершения анимации исчезновения
+      } else {
+        alert('Неверный пароль! Попробуйте еще раз.');
+      }
+    });
+
+    function showConfetti() {
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'absolute';
+        confetti.style.top = `${Math.random() * 100}%`;
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.width = `${Math.random() * 5 + 5}px`;
+        confetti.style.height = `${Math.random() * 5 + 5}px`;
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        confetti.style.opacity = 0.8;
+        confetti.style.transform = `translateY(-50px) rotate(${Math.random() * 360}deg)`;
+        confetti.style.animation = 'fall 4s ease-out forwards';
+        confettiContainer.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 3000);
+      }
+    }
+  </script>
+</body>
+</html>
